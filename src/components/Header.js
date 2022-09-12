@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const Header =() =>  {
-    return (
-      <h1>
-        Todo
-      </h1>
-    )
-  }
+/* eslint-disable-next-line arrow-body-style */
+const Header = () => {
+  return (
+    <h1>
+      Todo
+    </h1>
+  );
+};
 
-export default Header ;
+export default Header;

@@ -1,18 +1,17 @@
-import React from 'react'
-import TodoItem from './TodoItem'
+import React from 'react';
+import TodoItem from './TodoItem';
 
-const TodoList = (props) => {
-    return (
-      <div>
-        <ul>
-          {
-            props.todos.map( todo => (
-              <TodoItem key={todo.id} todo={todo} />
-            ))
-          }
-        </ul>
-      </div>
-    )
-}
+const TodoList = (props) => (
+  <div>
+    <ul>
+      {
+        // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+        props.todos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))
+      }
+    </ul>
+  </div>
+);
 
-export default TodoList
+export default TodoList;
