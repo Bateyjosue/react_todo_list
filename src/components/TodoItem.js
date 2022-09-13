@@ -5,7 +5,8 @@ const TodoItem = (props) => {
   return (
     <li>
       {/* eslint-disable-next-line react/destructuring-assignment, react/prop-types */}
-      {props.todo.title}
+      <input type="checkbox" checked={props.todo.completed} onChange={()=> props.handleChangeProps(props.todo.id)}/>{props.todo.title}
+      <button onClick={() => props.handleDelete(props.todo.id)}>Delete</button>
     </li>
   );
 };
