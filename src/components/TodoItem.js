@@ -1,60 +1,92 @@
-import React from 'react';
-import styles from "./TodoItem.module.css";
+import style from "./TodoItem.module.css";
+import React, { Component } from 'react';
 
-/* eslint-disable-next-line arrow-body-style */
-const TodoItem = (props) => {
-  const completedStyle = {
-    fontStyle: "italic",
-    color: "#595959",
-    opacity: 0.4,
-    textDecoration: "line-through",
+class TodoItem extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: false,
+    }
   }
 
-  const btnStyle = {
-    fontsSize: '13px',
-    background: '#f1f3f4',
-    border: 'none',
-    cursor: 'pointer',
-    float: 'right',
-    outline: 'none',
-    borderRadius: '100px',
-    height: '50px',
-    width: '50px',
-    margin: '-10px 0 0 10px',
-  };
+  handleEditing = () => {
+    this.setState({ editing: true })
+  }
 
-  const check = { 
-    marginRight: '15px',
-  };
+  handleUpdatedDone = event => {
+    if (event.key === "Enter") {
+      this.setState({ editing: false })
+    }
+  }
 
+  render() {
+    // {/* eslint-disable-next-line react/destructuring-assignment, react/prop-types */}
+    const {completed, id, title} = this.props.todo;
+    let viewMode = {};
+    let editMode = {};
+    const completedStyle = {
+      fontStyle: "italic",
+      color: "#595959",
+      opacity: 0.4,
+      textDecoration: "line-through",
+    }
+    
+    const btnStyle = {
+      fontsSize: '13px',
+      background: '#f1f3f4',
+      border: 'none',
+      cursor: 'pointer',
+      float: 'right',
+      outline: 'none',
+      borderRadius: '100px',
+      height: '50px',
+      width: '50px',
+      margin: '-10px 0 0 10px',
+    };
+    
+    const check = { 
+      marginRight: '15px',
+    };
+    
+    const item = {
+      fontSize: '1.2rem',
+      listStyleType: 'none',
+      padding: '17px 0px',
+      borderBottom: '1px solid #eaeaea',
+    };
 
-  const item = {
-    fontSize: '1.2rem',
-    listStyleType: 'none',
-    padding: '17px 0px',
-    borderBottom: '1px solid #eaeaea',
-  };
-
-  const {completed, id, title} = props.todo;
-
-  return (
-    <li className={styles.item} style={item}>
-      {/* eslint-disable-next-line react/destructuring-assignment, react/prop-types */}
-      <input 
-        type="checkbox" 
-        className={styles.checkbox}
-        checked={completed} 
-        onChange={()=> props.handleChangeProps(id)}
-        style={check}
-        />
-      <span style={completed ? completedStyle : null}>
-        {title}
-      </span>
-      <button onClick={() => props.handleDelete(id)} style={btnStyle}>Delete</button>
-    </li>
-  );
-};
-
-
+    if (this.state.editing) {
+      viewMode.display = 'none';
+    } else {
+      editMode.display = 'none';
+    }
+    return (
+      <li className={style.item} style={item}>
+        <div onDoubleClick={this.handleEditing} style={viewMode}>
+          <input 
+            type="checkbox" 
+            className={style.checkbox}
+            checked={completed} 
+            onChange={()=> this.props.handleChangeProps(id)}
+            style={check}
+            />
+          <span style={completed ? completedStyle : null}>
+            {title}
+          </span>
+          <button onClick={() => this.props.handleDelete(id)} style={btnStyle}>Delete</button>
+        </div>
+        <input 
+          type="text" 
+          className="edit-text"
+          style={editMode}
+          value={title} 
+          onChange={ (e) => {this.props.setUpdate(e.target.value, id)}}
+          onKeyDown={this.handleUpdatedDone}
+          />
+      </li>
+    );
+  }
+}
 
 export default TodoItem;
