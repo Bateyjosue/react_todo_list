@@ -66,11 +66,17 @@ class TodoContainer extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        {/* eslint-disable-next-line react/destructuring-assignment */}
-        <InputTodo addTodoProps={this.addTodoItem} />
-        <TodoList todos={this.state.todos} handleChangeProps={this.handleChange} handleDelete={this.delTodo} />
+      <div className="container">
+        <div className="inner">
+          <Header />
+          {/* eslint-disable-next-line react/destructuring-assignment */}
+          <InputTodo addTodoProps={this.addTodoItem} />
+          <TodoList 
+            todos={this.state.todos} 
+            handleChangeProps={this.handleChange} 
+            handleDelete={this.delTodo} 
+          />
+        </div>
       </div>
     );
   }
