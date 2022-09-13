@@ -1,8 +1,11 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import TodoList from './TodoList';
 import Header from './Header';
-import InputTodo from "./InputTodo";
-import { v4 as uuidv4 } from "uuid";
+import InputTodo from './InputTodo';
 
 class TodoContainer extends Component {
   constructor(props) {
@@ -29,49 +32,47 @@ class TodoContainer extends Component {
   }
 
   handleChange = (id) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       todos: prevState.todos.map((todo) => {
-        if(todo.id === id) {
+        if (todo.id === id) {
           return {
             ...todo,
             completed: !todo.completed,
-          }
+          };
         }
         return todo;
-      })
+      }),
     }));
   };
 
   delTodo = (id) => {
     this.setState({
       todos: [
-        ...this.state.todos.filter(todo => {
-          return todo.id !== id;
-        })
-      ]
-    })
+        ...this.state.todos.filter((todo) => todo.id !== id),
+      ],
+    });
   }
 
   addTodoItem = (item) => {
     const newTodo = {
       id: uuidv4(),
-      title:item,
-      completed: false
-    }
+      title: item,
+      completed: false,
+    };
     this.setState({
       todos: [...this.state.todos, newTodo],
-    })
+    });
   }
 
   setUpdate = (updatedTitle, id) => {
     this.setState({
-      todos: this.state.todos.map(todo => {
+      todos: this.state.todos.map((todo) => {
         if (todo.id === id) {
-          todo.title = updatedTitle
+          todo.title = updatedTitle;
         }
-        return todo
+        return todo;
       }),
-    })
+    });
   }
 
   render() {
@@ -79,11 +80,10 @@ class TodoContainer extends Component {
       <div className="container">
         <div className="inner">
           <Header />
-          {/* eslint-disable-next-line react/destructuring-assignment */}
           <InputTodo addTodoProps={this.addTodoItem} />
-          <TodoList 
-            todos={this.state.todos} 
-            handleChangeProps={this.handleChange} 
+          <TodoList
+            todos={this.state.todos}
+            handleChangeProps={this.handleChange}
             handleDelete={this.delTodo}
             setUpdate={this.setUpdate}
           />
