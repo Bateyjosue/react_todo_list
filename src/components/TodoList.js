@@ -7,7 +7,13 @@ const TodoList = (props) => (
       {
         // eslint-disable-next-line react/destructuring-assignment, react/prop-types
         props.todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} handleChangeProps={props.handleChangeProps} handleDelete={props.handleDelete} />
+          <TodoItem 
+            key={todo.id} 
+            todo={todo} 
+            handleChangeProps={props.handleChangeProps} 
+            handleDelete={props.handleDelete} 
+            setUpdate={props.setUpdate}
+            />
         ))
       }
     </ul>
