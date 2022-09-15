@@ -6,7 +6,7 @@
 
 ## Sreenshot<hr>
 
-![](./src/images/screenshot.png)
+![](https://github.com/Bateyjosue/react_todo_list/blob/dev/src/images/screen.png)
 
 ## Built With (Linker)
 
