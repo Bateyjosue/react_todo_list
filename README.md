@@ -39,7 +39,6 @@
 
     localhost:3000
 
-ℹ️ To know more about Leaderboard API see [here](https://www.notion.so/Leaderboard-API-service-24c0c3c116974ac49488d4eb0267ade3)
 ## Authors
 
 👤 **Josh Batey**
